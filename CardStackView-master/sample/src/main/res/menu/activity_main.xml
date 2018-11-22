@@ -4,9 +4,37 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <!--
     <item
         android:id="@+id/refresh"
         android:title="@string/refresh"
         app:showAsAction="never"/>
+    -->
+
+    <item
+        android:id="@+id/upload"
+        android:title="Upload"
+        app:showAsAction="always"
+        android:icon="@drawable/camera_24dp"
+        />
+
+    <item
+        android:id="@+id/home"
+        android:title="Home"
+        app:showAsAction="always"
+        android:icon="@drawable/home_24dp"
+        />
+
+    <item
+        android:id="@+id/action_trends"
+        android:title="Trends"
+        app:showAsAction="never"
+        android:icon="@drawable/search_24dp"/>
+
+    <item
+        android:id="@+id/action_chart"
+        android:title="Prediction"
+        app:showAsAction="never"
+        android:icon="@drawable/search_24dp"/>
 
 </menu>
