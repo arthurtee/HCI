@@ -30,7 +30,7 @@ public class TrendsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_trends);
 
         AnyChartView anyChartView = findViewById(R.id.any_chart_view);
-        //anyChartView.setProgressBar(findViewById(R.id.progressBar));
+        anyChartView.setProgressBar(findViewById(R.id.progressBar));
 
         Cartesian cartesian = AnyChart.line();
 
@@ -58,7 +58,7 @@ public class TrendsActivity extends AppCompatActivity {
         seriesData.add(new CustomDataEntry("Sun", 92, 10, 65));
         seriesData.add(new CustomDataEntry("Mon", 10, 13, 12));
         seriesData.add(new CustomDataEntry("Tues", 11, 13, 18));
-        seriesData.add(new CustomDataEntry("Wed", 45, 18, 10));
+        seriesData.add(new CustomDataEntry("Wed", 23, 33, 100));
 
 
         Set set = Set.instantiate();

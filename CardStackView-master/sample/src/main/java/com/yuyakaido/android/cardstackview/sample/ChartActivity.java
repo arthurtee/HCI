@@ -31,7 +31,7 @@ public class ChartActivity extends AppCompatActivity  {
         setContentView(R.layout.activity_chart);
 
         AnyChartView anyChartView = findViewById(R.id.any_chart_view);
-        //AnyChartView.setProgressBar(findViewById(R.id.progress_bar));
+        anyChartView.setProgressBar(findViewById(R.id.progressBar));
 
         Pie pie = AnyChart.pie();
 
