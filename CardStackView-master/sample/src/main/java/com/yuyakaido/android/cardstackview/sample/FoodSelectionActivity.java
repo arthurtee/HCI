@@ -6,69 +6,82 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.BaseAdapter;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
-
-import com.anychart.AnyChart;
-import com.anychart.AnyChartView;
-import com.anychart.chart.common.dataentry.DataEntry;
-import com.anychart.chart.common.dataentry.ValueDataEntry;
-import com.anychart.chart.common.listener.Event;
-import com.anychart.chart.common.listener.ListenersInterface;
-import com.anychart.charts.Pie;
-import com.anychart.enums.Align;
-import com.anychart.enums.LegendLayout;
-
-
-import java.util.ArrayList;
-import java.util.List;
 
 import static com.yuyakaido.android.cardstackview.sample.MainActivity.REQUEST_IMAGE_CAPTURE;
 
 
-public class ChartActivity extends AppCompatActivity  {
+public class FoodSelectionActivity extends AppCompatActivity {
 
+    String[] foodNames = {"Salad Peanut", "Chicken Chop", "Rice Fish Egg", "Salad Broccoli", "Banana"};
+    int[] foodImages = {R.drawable.happy_24dp,R.drawable.sad_24dp,R.drawable.sad_24dp,R.drawable.happy_24dp,R.drawable.happy_24dp};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_chart);
+        setContentView(R.layout.activity_food_selection);
 
-        AnyChartView anyChartView = findViewById(R.id.any_chart_view);
-        anyChartView.setProgressBar(findViewById(R.id.progressBar));
 
-        Pie pie = AnyChart.pie();
+        //finding listview
+        ListView listView = (ListView) findViewById(R.id.listview);
 
-        pie.setOnClickListener(new ListenersInterface.OnClickListener(new String[]{"x", "value"}) {
+        CustomAdapter customAdapter = new CustomAdapter();
+        listView.setAdapter(customAdapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onClick(Event event) {
-                Toast.makeText(ChartActivity.this, event.getData().get("x") + ":" + event.getData().get("value"), Toast.LENGTH_SHORT).show();
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+               Toast.makeText(getApplicationContext(),foodNames[i],Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(getApplicationContext(), FoodActivity.class);
+                intent.putExtra("name", foodNames[i]);
+                intent.putExtra("image",foodImages[i]);
+                startActivity(intent);
+
             }
         });
 
-        List<DataEntry> data = new ArrayList<>();
-        data.add(new ValueDataEntry("Minerals", 637));
-        data.add(new ValueDataEntry("Protein", 789));
-        data.add(new ValueDataEntry("Water", 721));
-        data.add(new ValueDataEntry("Fat", 148));
-        data.add(new ValueDataEntry("Carbohydrates", 120));
 
-        pie.data(data);
 
-        pie.title("Intake Prediction (Today)");
 
-        pie.labels().position("outside");
+    }
 
-        pie.legend().title().enabled(true);
-        pie.legend().title()
-                .text("Nutrition")
-                .padding(0d, 0d, 10d, 0d);
+    private class CustomAdapter extends BaseAdapter{
+        @Override
+        public int getCount() {
+            return foodImages.length;
+        }
 
-        pie.legend()
-                .position("center-bottom")
-                .itemsLayout(LegendLayout.HORIZONTAL)
-                .align(Align.CENTER);
+        @Override
+        public Object getItem(int i) {
+            return null;
+        }
 
-        anyChartView.setChart(pie);
+        @Override
+        public long getItemId(int i) {
+            return 0;
+        }
+
+        @Override
+        public View getView(int i, View view, ViewGroup viewGroup) {
+            View view1 = getLayoutInflater().inflate(R.layout.food_data,null);
+            //getting view in row_data
+            TextView name = view1.findViewById(R.id.food);
+            ImageView image = view1.findViewById(R.id.images);
+
+            name.setText(foodNames[i]);
+            image.setImageResource(foodImages[i]);
+            return view1;
+
+
+
+        }
     }
 
 
@@ -81,7 +94,7 @@ public class ChartActivity extends AppCompatActivity  {
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
-        MenuItem item_search = menu.findItem(R.id.action_chart);
+        MenuItem item_search = menu.findItem(R.id.action_history);
         item_search.setVisible(false);
 
         //MenuItem item_refresh = menu.findItem(R.id.refresh);
@@ -99,10 +112,6 @@ public class ChartActivity extends AppCompatActivity  {
             case R.id.home:
                 Intent backHome = new Intent(this,MainActivity.class);
                 this.startActivity(backHome);
-                break;
-            case R.id.action_history:
-                Intent backUploads = new Intent(this,FoodSelectionActivity.class);
-                this.startActivity(backUploads);
                 break;
             case R.id.action_chart:
                 Intent toChart = new Intent(this,ChartActivity.class);

@@ -2,6 +2,7 @@ package com.yuyakaido.android.cardstackview.sample;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -21,6 +22,8 @@ import com.anychart.graphics.vector.Stroke;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.yuyakaido.android.cardstackview.sample.MainActivity.REQUEST_IMAGE_CAPTURE;
 
 public class TrendsActivity extends AppCompatActivity {
 
@@ -142,17 +145,35 @@ public class TrendsActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
 
+            case R.id.upload:
+                dispatchTakePictureIntent();
+                break;
             case R.id.home:
                 Intent backHome = new Intent(this,MainActivity.class);
                 this.startActivity(backHome);
+                break;
+            case R.id.action_history:
+                Intent backUploads = new Intent(this,FoodSelectionActivity.class);
+                this.startActivity(backUploads);
                 break;
             case R.id.action_chart:
                 Intent toChart = new Intent(this,ChartActivity.class);
                 this.startActivity(toChart);
                 break;
+            case R.id.action_about_us:
+                Intent toAboutUs = new Intent(this,AboutUsActivity.class);
+                this.startActivity(toAboutUs);
+                break;
 
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void dispatchTakePictureIntent() {
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+        }
     }
 
 }

@@ -1,8 +1,11 @@
 package com.yuyakaido.android.cardstackview.sample;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -21,7 +24,6 @@ import com.yuyakaido.android.cardstackview.SwipeAnimationSetting;
 
 import java.util.ArrayList;
 import java.util.List;
-import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements CardStackListener {
 
@@ -36,6 +38,13 @@ public class MainActivity extends AppCompatActivity implements CardStackListener
         setContentView(R.layout.activity_main);
         setupCardStackView();
         setupButton();
+
+        SharedPreferences prefs = getSharedPreferences("prefs", MODE_PRIVATE);
+        boolean firstStart = prefs.getBoolean("firstStart", true);
+
+        if (firstStart) {
+            showStartDialog();
+        }
     }
 
     @Override
@@ -50,12 +59,16 @@ public class MainActivity extends AppCompatActivity implements CardStackListener
             //case R.id.refresh:
             //    refresh();
             //    break;
+            case R.id.upload:
+                dispatchTakePictureIntent();
+                break;
             case R.id.home:
                 Intent backHome = new Intent(this,MainActivity.class);
                 this.startActivity(backHome);
                 break;
-            case R.id.upload:
-                dispatchTakePictureIntent();
+            case R.id.action_history:
+                Intent backUploads = new Intent(this,FoodSelectionActivity.class);
+                this.startActivity(backUploads);
                 break;
             case R.id.action_chart:
                 Intent toChart = new Intent(this,ChartActivity.class);
@@ -64,6 +77,10 @@ public class MainActivity extends AppCompatActivity implements CardStackListener
             case R.id.action_trends:
                 Intent toTrends = new Intent(this,TrendsActivity.class);
                 this.startActivity(toTrends);
+                break;
+            case R.id.action_about_us:
+                Intent toAboutUs = new Intent(this,AboutUsActivity.class);
+                this.startActivity(toAboutUs);
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -186,6 +203,25 @@ public class MainActivity extends AppCompatActivity implements CardStackListener
 
 
         return spots;
+    }
+
+
+    private void showStartDialog() {
+        new AlertDialog.Builder(this)
+                .setTitle("Welcome to Fooder")
+                .setMessage("Start Swiping To Rate:\n-Swipe Left (Unhealthy)\n-Swipe Right (Healthy)")
+                .setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .create().show();
+
+        SharedPreferences prefs = getSharedPreferences("prefs", MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putBoolean("firstStart", false);
+        editor.apply();
     }
 
 }
