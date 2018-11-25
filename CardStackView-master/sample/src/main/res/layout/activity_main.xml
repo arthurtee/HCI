@@ -34,7 +34,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
                 android:hapticFeedbackEnabled="true"
-                android:src="@drawable/skip_red_24dp"
+                android:src="@drawable/sad_24dp"
                 app:backgroundTint="@android:color/white"
                 app:fabSize="auto"
                 app:rippleColor="#22ED7563"/>
@@ -77,7 +77,7 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:hapticFeedbackEnabled="true"
-                android:src="@drawable/like_green_24dp"
+                android:src="@drawable/happy_24dp"
                 app:backgroundTint="@android:color/white"
                 app:fabSize="auto"
                 app:rippleColor="#226FE2B3"/>
