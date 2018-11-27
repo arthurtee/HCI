@@ -1,4 +1,4 @@
-package com.yuyakaido.android.cardstackview.sample;
+package com.yuyakaido.android.cardstackview.fooder;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -23,7 +23,7 @@ import com.anychart.graphics.vector.Stroke;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.yuyakaido.android.cardstackview.sample.MainActivity.REQUEST_IMAGE_CAPTURE;
+import static com.yuyakaido.android.cardstackview.fooder.MainActivity.REQUEST_IMAGE_CAPTURE;
 
 public class TrendsActivity extends AppCompatActivity {
 
