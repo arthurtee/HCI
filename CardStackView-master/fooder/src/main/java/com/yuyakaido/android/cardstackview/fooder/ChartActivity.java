@@ -1,4 +1,4 @@
-package com.yuyakaido.android.cardstackview.sample;
+package com.yuyakaido.android.cardstackview.fooder;
 
 import android.content.Intent;
 import android.provider.MediaStore;
@@ -6,9 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ProgressBar;
 import android.widget.Toast;
-
 
 import com.anychart.AnyChart;
 import com.anychart.AnyChartView;
@@ -20,17 +18,20 @@ import com.anychart.charts.Pie;
 import com.anychart.enums.Align;
 import com.anychart.enums.LegendLayout;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.yuyakaido.android.cardstackview.sample.MainActivity.REQUEST_IMAGE_CAPTURE;
+import static com.yuyakaido.android.cardstackview.fooder.MainActivity.REQUEST_IMAGE_CAPTURE;
 
-public class FoodActivity extends AppCompatActivity {
+
+public class ChartActivity extends AppCompatActivity  {
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_food);
+        setContentView(R.layout.activity_chart);
 
         AnyChartView anyChartView = findViewById(R.id.any_chart_view);
         anyChartView.setProgressBar(findViewById(R.id.progressBar));
@@ -40,32 +41,26 @@ public class FoodActivity extends AppCompatActivity {
         pie.setOnClickListener(new ListenersInterface.OnClickListener(new String[]{"x", "value"}) {
             @Override
             public void onClick(Event event) {
-                Toast.makeText(FoodActivity.this, event.getData().get("x") + ":" + event.getData().get("value"), Toast.LENGTH_SHORT).show();
+                Toast.makeText(ChartActivity.this, event.getData().get("x") + ":" + event.getData().get("value"), Toast.LENGTH_SHORT).show();
             }
         });
 
         List<DataEntry> data = new ArrayList<>();
-
-        if (getIntent().getStringExtra("name").contentEquals("Chicken Chop") ||
-        getIntent().getStringExtra("name").contentEquals("Rice Fish Egg")){
-            data.add(new ValueDataEntry("Healthy", 60));
-            data.add(new ValueDataEntry("Unhealthy", 290));
-        }else{
-            data.add(new ValueDataEntry("Healthy", 210));
-            data.add(new ValueDataEntry("Unhealthy", 90));
-        }
+        data.add(new ValueDataEntry("Minerals", 637));
+        data.add(new ValueDataEntry("Protein", 789));
+        data.add(new ValueDataEntry("Water", 721));
+        data.add(new ValueDataEntry("Fat", 148));
+        data.add(new ValueDataEntry("Carbohydrates", 120));
 
         pie.data(data);
 
-
-
-        pie.title(getIntent().getStringExtra("name") + " (28 Nov 2018) ");
+        pie.title("Intake Prediction (Today)");
 
         pie.labels().position("outside");
 
         pie.legend().title().enabled(true);
         pie.legend().title()
-                .text("Community Responds")
+                .text("Nutrition")
                 .padding(0d, 0d, 10d, 0d);
 
         pie.legend()
@@ -74,7 +69,6 @@ public class FoodActivity extends AppCompatActivity {
                 .align(Align.CENTER);
 
         anyChartView.setChart(pie);
-
     }
 
 
@@ -87,7 +81,11 @@ public class FoodActivity extends AppCompatActivity {
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
+        MenuItem item_search = menu.findItem(R.id.action_chart);
+        item_search.setVisible(false);
 
+        //MenuItem item_refresh = menu.findItem(R.id.refresh);
+        //item_refresh.setVisible(false);
         return true;
     }
 
@@ -122,7 +120,6 @@ public class FoodActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
 
     private void dispatchTakePictureIntent() {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);

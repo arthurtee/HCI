@@ -1,14 +1,11 @@
-package com.yuyakaido.android.cardstackview.sample;
+package com.yuyakaido.android.cardstackview.fooder;
 
 import android.content.res.Configuration;
-import android.icu.util.Calendar;
-import android.icu.util.RangeValueIterator;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatDelegate;
 import android.view.Gravity;
 import android.view.View;
-import android.widget.Toast;
 
 import mehdi.sakout.aboutpage.AboutPage;
 import mehdi.sakout.aboutpage.Element;
