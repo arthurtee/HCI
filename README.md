@@ -10,7 +10,7 @@ Instructions to run:
   3) Working source code are located in HCI\CardStackView-master\fooder
 
 
-Implementation sources: 
+Implementation Library Sources: 
   1) Tinder like swipeable card view 
   https://github.com/yuyakaido/CardStackView
   
