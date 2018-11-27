@@ -3,4 +3,6 @@
 <resources>
     <string name="app_name">Fooder</string>
     <string name="refresh">Refresh</string>
+    <string name="title_activity_test1">test1</string>
+    <string name="title_activity_uploads">UploadsActivity</string>
 </resources>
