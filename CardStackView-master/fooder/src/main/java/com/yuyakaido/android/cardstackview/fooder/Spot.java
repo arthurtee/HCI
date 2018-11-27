@@ -1,4 +1,4 @@
-package com.yuyakaido.android.cardstackview.sample;
+package com.yuyakaido.android.cardstackview.fooder;
 
 public class Spot {
     public String food;
