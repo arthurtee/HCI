@@ -1,15 +1,6 @@
 # HCI
 HCI AX Fooder Mobile App 
 
-Instructions to run: 
-
-  1) Project source code can be downloaded and imported to Android Studio
-  
-  2) Project source code can be run directly from Android Studio. 
-  
-  3) Working source code are located in HCI\CardStackView-master\fooder
-
-
 Implementation Library Sources: 
   1) Tinder like swipeable card view 
   https://github.com/yuyakaido/CardStackView
